@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Metric/Imperial Converter</title>
+    <meta
+      name="description"
+      content="An example of the Free Code Camp Metric/Imperial Converter Project"
+    />
+    <link id="favicon" rel="icon" href="%PUBLIC_URL%/peanut.ico" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./public/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Metric/Imperial Converter</h1>
+    </header>
+    <section>
+      <h3>Valid Units: Gal / L / Mi / Km / Lbs / Kg</h3>
+    </section>
+    <section>
+      <div id="testui">
+        <form id="convertForm" class="border">
+          <input type="text" id="convertField" name="input" style="width: 200px" />
+          <input id="convert" type="submit" value="Convert!" />
+        </form>
+        <p id="result">
+          <span id="initInput"></span>
+          <span id="returnResult"></span>
+          <span id="error"></span>
+        </p>
+      </div>
+    </section>
+    <!-- Your web-app is https, so your scripts need to be too -->
+    <script
+      src="https://code.jquery.com/jquery-2.2.1.min.js"
+      integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(function () {
+        $("#convertForm").submit(function (event) {
+          event.preventDefault();
+          $.ajax({
+            url: "/api/convert",
+            type: "get",
+            data: $("#convertForm").serialize(),
+            success: function (data) {
+              if (!data.initNum || !data.initNum) {
+                $("#error").text(data);
+              } else {
+                $("#initInput").text(data.initNum + data.initUnit + " = ");
+                $("#returnResult").text(data.returnNum + data.returnUnit);
+              }
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

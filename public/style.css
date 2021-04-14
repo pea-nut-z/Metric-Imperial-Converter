@@ -1,7 +1,13 @@
-code {
-    background-color: whitesmoke;
+body {
+  max-width: 600px;
+  margin: auto;
+  top: 50%;
+  -ms-transform: translateY(50%);
+  transform: translateY(50%);
+  font-family: Georgia, serif;
 }
 
-section, header {
-    margin: 50px;
+h1,
+#result {
+  color: rgb(223, 117, 18);
 }
